@@ -33,10 +33,12 @@ RUN set -ex; \
       libpam0g-dev \
       libparse-yapp-perl \
       libpcap-dev \
+      libpopt0 \
       libpopt-dev \
       libreadline-dev \
       libsystemd-dev \
       libtalloc-dev  \
+      libtdb1 \
       libtdb-dev  \
       libtevent-dev  \
       perl \
