@@ -12,7 +12,6 @@ RUN set -ex; \
       docbook-xml \
       docbook-xsl \
       flex \
-      libpopt \
       libacl1-dev \
       libarchive-dev \
       libattr1-dev \
