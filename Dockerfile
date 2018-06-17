@@ -56,7 +56,7 @@ RUN set -ex; \
     apt-get update; \
     apt-get -y dist-upgrade --autoremove ;\
     apt-get -y --no-install-recommends install $BUILD_DEPS ;\
-    apt-get -y install libpopt0 libtdb1 libcups2 libavahi-client3 libavahi-common3 libavahi-common-data libdbus-1-3 ;\
+    apt-get -y install libpopt0 libtdb1 libcups2 libavahi-client3 libavahi-common3 libavahi-common-data libdbus-1-3 libcap2 libjansson4 ;\
     adduser --disabled-password --gecos 'TimeMachine' timemachine ;\
     mkdir -p /tmp ;\
     cd /tmp ;\
