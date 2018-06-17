@@ -33,12 +33,10 @@ RUN set -ex; \
       libpam0g-dev \
       libparse-yapp-perl \
       libpcap-dev \
-      libpopt0 \
       libpopt-dev \
       libreadline-dev \
       libsystemd-dev \
       libtalloc-dev  \
-      libtdb1 \
       libtdb-dev  \
       libtevent-dev  \
       perl \
@@ -58,6 +56,7 @@ RUN set -ex; \
     apt-get update; \
     apt-get -y dist-upgrade --autoremove ;\
     apt-get -y --no-install-recommends install $BUILD_DEPS ;\
+    apt-get -y install libpopt0 libtdb1 libcups2 libavahi-client3 libavahi-common3 libavahi-common-data libdbus-1-3 ;\
     adduser --disabled-password --gecos 'TimeMachine' timemachine ;\
     mkdir -p /tmp ;\
     cd /tmp ;\
