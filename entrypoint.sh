@@ -2,7 +2,7 @@
 
 set -e
 
-if [ ! -e /.initialized_user ] && [ ! -z $SMB_LOGIN ] && [ ! -z $SMB_PASSWORD ] && [ ! getent passwd $SMB_LOGIN > /dev/null 2>&1 ]; then
+if [ ! -z $SMB_LOGIN ] && [ ! -z $SMB_PASSWORD ] && [ ! id -u $SMB_LOGIN > /dev/null 2>&1 ]; then
     if [ ! -z $SMB_UID ] && [ ! -z $SMB_GID ]; then
         adduser --disabled-password --gecos $SMB_LOGIN --uid $SMB_UID --gid $SMB_GID $SMB_LOGIN
     else
@@ -16,7 +16,6 @@ if [ ! -e /.initialized_user ] && [ ! -z $SMB_LOGIN ] && [ ! -z $SMB_PASSWORD ] 
     sed -i -e "s/timemachine/${SMB_LOGIN}/g" /etc/fix-attrs.d/01-time-capsule-dir
     sed -i -e "s/timemachine/${SMB_LOGIN}/g" /etc/samba/smb.conf
 
-    touch /.initialized_user
 fi
 
 /init
