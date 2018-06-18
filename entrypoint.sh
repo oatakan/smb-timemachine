@@ -2,7 +2,7 @@
 
 set -e
 
-if [ ! -z $SMB_LOGIN ] && [ ! -z $SMB_PASSWORD ] && [ ! id -u $SMB_LOGIN > /dev/null 2>&1 ]; then
+if [ ! -z $SMB_LOGIN ] && [ ! -z $SMB_PASSWORD ] && [ ! $(id -u $SMB_LOGIN > /dev/null 2>&1) ]; then
     if [ ! -z $SMB_UID ] && [ ! -z $SMB_GID ]; then
         adduser --disabled-password --gecos $SMB_LOGIN --uid $SMB_UID --gid $SMB_GID $SMB_LOGIN
     else
