@@ -63,6 +63,8 @@ RUN set -ex; \
     tar -xzf s6-overlay-amd64.tar.gz -C / ;\
     rm s6-overlay-amd64.tar.gz ;\
     cd /tmp ;\
+    wget https://download.samba.org/pub/samba/rc/samba-${SAMBA_VERSION}.tar.gz ;\
+    tar -xzvf samba-${SAMBA_VERSION}.tar.gz ;\
     cd /tmp/samba-${SAMBA_VERSION} ;\
     ./configure --prefix=/usr \
        --enable-fhs \
