@@ -57,16 +57,17 @@ RUN set -ex; \
     apt-get -y dist-upgrade --autoremove ;\
     apt-get -y --no-install-recommends install $BUILD_DEPS ;\
     apt-get -y install libpopt0 libtdb1 libcups2 libavahi-client3 libavahi-common3 libavahi-common-data libdbus-1-3 libcap2 libjansson4 ;\
+    adduser --disabled-password --gecos 'TimeMachine' timemachine ;\
     mkdir -p /tmp ;\
     cd /tmp ;\
     wget https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-amd64.tar.gz ;\
     tar -xzf s6-overlay-amd64.tar.gz -C / ;\
     rm s6-overlay-amd64.tar.gz ;\
     cd /tmp ;\
-    wget https://download.samba.org/pub/samba/rc/samba-${SAMBA_VERSION}.tar.gz ;\
-    tar -xzvf samba-${SAMBA_VERSION}.tar.gz ;\
+    su timemachine -m -c "wget https://download.samba.org/pub/samba/rc/samba-${SAMBA_VERSION}.tar.gz" ;\
+    su timemachine -m -c "tar -xzvf samba-${SAMBA_VERSION}.tar.gz" ;\
     cd /tmp/samba-${SAMBA_VERSION} ;\
-    ./configure --prefix=/usr \
+    su timemachine -m -c "./configure --prefix=/usr \
        --enable-fhs \
        --sysconfdir=/etc \
        --localstatedir=/var \
@@ -98,8 +99,8 @@ RUN set -ex; \
        --builtin-libraries=ccan,samba-cluster-support \
        --minimum-library-version=\"$(shell ./debian/autodeps.py --minimum-library-version)\" \
        --libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
-       --with-modulesdir=/usr/lib/$(DEB_HOST_MULTIARCH)/samba ;\
-    make -j$(nproc) ;\
+       --with-modulesdir=/usr/lib/$(DEB_HOST_MULTIARCH)/samba" ;\
+    su timemachine -m -c "make -j$(nproc)" ;\
     make install ;\
     cd /tmp ;\
     rm -rf --one-file-system /tmp/samba* ;\
