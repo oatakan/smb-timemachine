@@ -117,6 +117,7 @@ ENV SMB_LOGIN=timemachine
 ENV SMB_PASSWORD=tmpass
 
 ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 ARG BUILD_DATE
 ARG VCS_REF
